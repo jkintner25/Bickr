@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
+const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 router.use('/api', apiRouter);
 

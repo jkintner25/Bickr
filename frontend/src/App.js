@@ -5,6 +5,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import NewPhotoFormPage from "./components/UploadNewPhotoPage/upload-photo-form"
+import PhotoStream from "./components/PhotoStream/Index";
+import PhotoPage from "./components/PhotoPage/Photo";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +26,15 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/photostream">
+            <PhotoStream />
+          </Route>
+          <Route path="/uploadPhoto">
+            <NewPhotoFormPage />
+          </Route>
+          <Route path="/photos/:id">
+            <PhotoPage />
           </Route>
         </Switch>
       )}

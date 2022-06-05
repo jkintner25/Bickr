@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import NewPhotoFormPage from "./components/UploadNewPhotoPage/upload-photo-form"
 import PhotoStream from "./components/PhotoStream/Index";
 import PhotoPage from "./components/PhotoPage/Photo";
+import SplashPage from "./components/SplashPage/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <SplashPage />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>

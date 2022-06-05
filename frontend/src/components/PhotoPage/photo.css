@@ -1,6 +1,5 @@
 
 .big-black-bg {
-    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -31,7 +30,7 @@
     text-decoration: none;
     color: white;
     font-size: 14px;
-    top: 10px;
+    top: 60px;
     left: 10px;
 }
 

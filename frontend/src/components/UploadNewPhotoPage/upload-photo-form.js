@@ -28,7 +28,6 @@ const Form = styled.form`
 
 const Label = styled.div`
     display: flex;
-
 `;
 
 const Title = styled.div`

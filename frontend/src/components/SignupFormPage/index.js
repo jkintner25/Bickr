@@ -14,7 +14,7 @@ function SignupFormPage() {
     const [errors, setErrors] = useState([]);
     const [fullName, setFullName] = useState("")
 
-    if (sessionUser) return <Redirect to="/" />;
+    if (sessionUser) return <Redirect to="/photostream" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();

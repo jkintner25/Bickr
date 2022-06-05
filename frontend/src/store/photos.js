@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-//define verbs
+//action types
 const ADD_PHOTO = "photos/ADD_PHOTO";
 const GET_ALL_PHOTOS = "photos/GET_ALL_PHOTOS";
 const UPDATE_PHOTO = "photos/UPDATE_PHOTO";

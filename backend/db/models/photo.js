@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Photo = sequelize.define('Photo', {
     picSrc: DataTypes.TEXT,
     description: DataTypes.TEXT,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    albumId: DataTypes.INTEGER
   }, {});
   Photo.associate = function(models) {
     Photo.belongsTo(models.User, {foreignKey: 'userId'})

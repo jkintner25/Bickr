@@ -32,7 +32,8 @@ body {
 
 .profile-dropdown {
     position: absolute;
-    background-color: white;
+    color: white;
+    background-color: rgba(35, 35, 37, 0.986);
     padding: 10px;
     border: 1px solid black;
     border-radius: 6%;

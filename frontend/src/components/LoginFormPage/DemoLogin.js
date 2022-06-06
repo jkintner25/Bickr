@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import './LoginForm.css';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -51,7 +50,7 @@ const LoginBtn = styled.button`
     cursor: pointer;
 `;
 
-function LoginFormPage() {
+function DemoLogin() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -59,21 +58,15 @@ function LoginFormPage() {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
+    useEffect(()=>{
+        handleSubmit()
+    }, [])
+
     if (sessionUser) return (
         <Redirect to="/photostream" />
     );
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrors([]);
-        return dispatch(sessionActions.login({ credential, password }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
-    }
-
-    const handleDefaultButton = (e) => {
         e.preventDefault();
 
         const credential = 'demo@user.io'
@@ -120,4 +113,4 @@ function LoginFormPage() {
     );
 }
 
-export default LoginFormPage;
+export default DemoLogin;

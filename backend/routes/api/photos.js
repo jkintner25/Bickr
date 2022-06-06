@@ -36,11 +36,9 @@ router.put(
     '/edit/:id',
     asyncHandler(async (req, res) => {
         const { id } = req.params;
-        const {description} = req.body;
         const photo = await Photo.findByPk(id);
-        photo.description = description;
-        await photo.save()
-        return res.json(photo)
+        const newPhoto = await photo.update(req.body)
+        return res.json(newPhoto)
     })
 )
 
@@ -49,13 +47,8 @@ router.delete(
     requireAuth,
     asyncHandler(async (req, res) => {
         const { id } = req.params;
-        // const { user } = req
         const photo = await Photo.findByPk(id);
-        // if (user.id === photo.userId){
         await photo.destroy()
-        // } else {
-        //     new Error('You do not have permission to delete this photo.')
-        // }
         return res.json(photo)
     })
 )

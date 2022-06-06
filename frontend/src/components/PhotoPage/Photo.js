@@ -55,9 +55,9 @@ export default function PhotoPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
     const user = useSelector(state => photo && state.users[photo.userId])
-    const album = useSelector(state => photo && state.albums[photo.albumId])
+    const albums = useSelector(state => photo && state.albums[photo.albumId])
     const history = useHistory();
-    const [description, setDescription] = useState(photo?.description)
+    const [description, setDescription] = useState(photo?.description || '')
     const [edit, setEdit] = useState(false)
 
     const onSave = (e) => {
@@ -82,9 +82,9 @@ export default function PhotoPage() {
     }, [photo])
 
     useEffect(() => {
-        if (!photo?.albumId || album) return;
+        if (!photo?.albumId || albums) return;
         dispatch(getAlbum(photo.albumId))
-    }, [photo, album])
+    }, [photo, albums])
 
     return (
         <div>
@@ -117,7 +117,7 @@ export default function PhotoPage() {
                         </form>) :
                             <p>{photo?.description}</p>}
                     </div>
-                    {album && <p>{album?.title}</p>}
+                    {albums && <p>{albums?.title}</p>}
                     <AddToAlbumButton photoId={id} />
                 </div>
             </div>

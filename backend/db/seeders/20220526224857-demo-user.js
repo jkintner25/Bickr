@@ -6,10 +6,10 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       {
         email: 'demo@user.io',
-        username: 'Demo-lition',
+        username: 'Demo',
         hashedPassword: bcrypt.hashSync('password'),
-        fullName: 'demolition',
-        bio: 'Just a guy.',
+        fullName: 'Demo User',
+        bio: 'This account exists for demonstration purposes only.',
         picSrc: "https://media.vlipsy.com/vlips/0NhLvH64/preview.jpg"
       }
     ], {});

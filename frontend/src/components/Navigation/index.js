@@ -1,12 +1,33 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import { AiOutlineCloudUpload } from "react-icons/ai"
+import * as sessionActions from '../../store/session';
+import styled from 'styled-components';
+
+const Button = styled.button`
+    border-radius: 5px;
+    background-color: #128fdc;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+`;
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+
+        const credential = 'demo@user.io'
+        const password = 'password'
+
+        return dispatch(sessionActions.login({ credential, password }))
+            .then(() => history.push('/photostream'))
+    }
 
     let sessionLinks;
     if (sessionUser) {
@@ -18,6 +39,7 @@ function Navigation({ isLoaded }) {
             <>
                 <NavLink to="/login">Log In</NavLink>
                 <NavLink to="/signup">Sign Up</NavLink>
+                <Button onClick={()=>handleSubmit()}>Demo</Button>
             </>
         );
     }

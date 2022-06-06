@@ -51,10 +51,16 @@ const Title = styled.div`
     margin-bottom: 5rem;
 `;
 
+const ErrorMessage = styled.li`
+    color: white;
+    font-size: 18px;
+`;
+
 function AlbumForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const [title, setTitle] = useState('');
+    const [validationErrors, setValidationErrors] = useState([])
 
     const userId = useSelector((state) => state.session.user.id)
 
@@ -72,10 +78,21 @@ function AlbumForm() {
         history.push(`/albums`)
     }
 
+    useEffect(() => {
+        let errors = [];
+        if (!title) errors.push("Your album needs a title!");
+        setValidationErrors(errors);
+    }, [title])
+
     return (
         <Container>
             <Title>Create a new Album!</Title>
             <Form onSubmit={handleSubmit}>
+                <ul>
+                    {validationErrors.map((error) => (
+                        <ErrorMessage key={error}>{error}</ErrorMessage>
+                    ))}
+                </ul>
                 <Label>Title
                     <input
                         name="title"

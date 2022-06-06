@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components"
 import { getUserAlbums } from "../../store/albums";
 import { editPhoto } from "../../store/photos";
-import Button from "../../Styles/Button";
 
 const Backdrop = styled.div`
 position: absolute;
@@ -49,23 +48,26 @@ function AddToAlbumModal({closeModal, photoId}) {
 
     const albums = useSelector((state)=>{
         return Object.values(state.albums).filter((album)=>{
-            return album.id === userId
+            return album.userId === userId
         })
     })
+
+    const photo = useSelector(state=>state.photos[photoId])
 
     useEffect( () => {
         dispatch(getUserAlbums(userId))
     },[userId])
 
     const addToAlbum = (albumId) => {
-        dispatch(editPhoto({id: photoId, albumId}))
+        const newPhoto = {
+            id: photoId,
+            albumId,
+            userId,
+            description: photo.description,
+            picSrc: photo.picSrc
+        }
+        dispatch(editPhoto(newPhoto))
         closeModal();
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        //WHERE TO GO
     }
 
     return (
@@ -74,14 +76,6 @@ function AddToAlbumModal({closeModal, photoId}) {
                 {albums.map(album=>{
                     return <AlbumRow onClick={()=>addToAlbum(album.id)} key={album.id}>{album.title}</AlbumRow>
                 })}
-                <form onSubmit={handleSubmit}>
-                <label>Create Album<input
-                value={title}
-                onChange={(e)=>setTitle(e.value)} />
-                </label>
-                <Button type="submit">Create</Button>
-                </form>
-
             </Modal>
         </Backdrop>
     )

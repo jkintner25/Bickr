@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -11,6 +11,10 @@ import PhotoPage from "./components/PhotoPage/Photo";
 import SplashPage from "./components/SplashPage/SplashPage";
 import AlbumCatalogue from "./components/Album/AlbumsViewer";
 import AlbumForm from "./components/Album/AlbumForm";
+import SingleAlbum from "./components/Album/SingleAlbum";
+import { getUserAlbums } from "./store/albums";
+import { loadPhotos } from "./store/photos";
+import DemoLogin from "./components/LoginFormPage/DemoLogin";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +22,16 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  const user = useSelector(state=>state.session.user)
+
+  useEffect(() => {
+    if (user) dispatch(getUserAlbums(user.id))
+  }, [dispatch, user])
+
+  useEffect(() => {
+    if (user) dispatch(loadPhotos())
+  }, [dispatch, user])
 
   return (
     <>
@@ -47,6 +61,9 @@ function App() {
           </Route>
           <Route path="/newAlbum">
             <AlbumForm />
+          </Route>
+          <Route path="/albums/:id">
+            <SingleAlbum />
           </Route>
         </Switch>
       )}

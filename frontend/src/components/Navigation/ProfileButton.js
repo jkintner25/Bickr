@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import { CgProfile } from 'react-icons/cg'
+import "./Navigation.css"
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -32,9 +34,9 @@ function ProfileButton({ user }) {
     };
 
     return (
-        <div style={{position: "relative"}}>
+        <div style={{ position: "relative" }}>
             <button onClick={openMenu}>
-                <i className="fas fa-user-circle" />
+                <CgProfile />
             </button>
             {showMenu && (
                 <ul className="profile-dropdown">

@@ -26,7 +26,8 @@ function Navigation({ isLoaded }) {
         <div className='nav-bar'>
             <div className='nav-bar-content'>
                 <div className='nav-bar-section'>
-                    <NavLink exact to="/photostream">Mickr</NavLink>
+                    <NavLink exact to="/">Mickr</NavLink>
+                    <NavLink exact to="/photostream">Photostream</NavLink>
                     <NavLink exact to="/albums">Albums</NavLink>
                 </div>
                 <div className='nav-bar-section'>

@@ -9,6 +9,8 @@ import NewPhotoFormPage from "./components/UploadNewPhotoPage/upload-photo-form"
 import PhotoStream from "./components/PhotoStream/Index";
 import PhotoPage from "./components/PhotoPage/Photo";
 import SplashPage from "./components/SplashPage/SplashPage";
+import AlbumCatalogue from "./components/Album/AlbumsViewer";
+import AlbumForm from "./components/Album/AlbumForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +41,12 @@ function App() {
           </Route>
           <Route path="/photos/:id">
             <PhotoPage />
+          </Route>
+          <Route exact path="/albums">
+            <AlbumCatalogue />
+          </Route>
+          <Route path="/newAlbum">
+            <AlbumForm />
           </Route>
         </Switch>
       )}

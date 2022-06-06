@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addPhoto } from "../../store/photos";
 import styled from "styled-components"
+import { addAlbum } from "../../store/albums";
 
 const Container = styled.div`
     background-color: #212124;
@@ -26,8 +27,22 @@ const Form = styled.form`
     }
 `;
 
-const Label = styled.div`
+const CreateAlbumBtn = styled.button`
+    /* position: absolute; */
+    margin: 10px;
+    margin-bottom: 0;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #128fdc;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+const Label = styled.label`
     display: flex;
+    color: white;
 `;
 
 const Title = styled.div`
@@ -36,62 +51,44 @@ const Title = styled.div`
     margin-bottom: 5rem;
 `;
 
-function NewPhotoFormPage() {
+function AlbumForm() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [picSrc, setPicSrc] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
 
     const userId = useSelector((state) => state.session.user.id)
 
-    const updatePicSrc = (e) => setPicSrc(e.target.value)
-    const updateDescription = (e) => setDescription(e.target.value)
+    const updateTitle = (e) => setTitle(e.target.value)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const payload = {
-            picSrc,
-            description,
+            title,
             userId
         };
 
-        let newPhoto = await dispatch(addPhoto(payload))
-        history.push(`/photostream`)
+        dispatch(addAlbum(payload))
+        history.push(`/albums`)
     }
-
-    // const updateFile = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) setImage(file);
-    // };
 
     return (
         <Container>
-            <Title>Upload a photo of Mick Jagger!</Title>
+            <Title>Create a new Album!</Title>
             <Form onSubmit={handleSubmit}>
-                <Label>
-                    <label>Image URL</label>
+                <Label>Title
                     <input
-                        name="imgUrl"
+                        name="title"
                         type="text"
-                        placeholder="img url"
-                        value={picSrc}
-                        onChange={updatePicSrc}>
+                        placeholder="title"
+                        value={title}
+                        onChange={updateTitle}>
                     </input>
                 </Label>
-                <Label>
-                    <label>Photo Description</label>
-                    <input
-                        type="textarea"
-                        placeholder="description"
-                        value={description}
-                        onChange={updateDescription}>
-                    </input>
-                </Label>
-                <button type="submit">Upload</button>
+                <CreateAlbumBtn type="submit">Create</CreateAlbumBtn>
             </Form>
         </Container>
     )
 }
 
-export default NewPhotoFormPage;
+export default AlbumForm;

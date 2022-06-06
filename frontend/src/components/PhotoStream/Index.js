@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPhotos } from "../../store/photos";
 import "./index.css";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const BlackBg = styled.div`
+    position: absolute;
+    background-color: #212124;
+    height: 100%;
+`;
 
 export default function PhotoStream() {
     const dispatch = useDispatch();
@@ -16,18 +23,19 @@ export default function PhotoStream() {
     }, [])
 
     return (
-        <div className="photostream-container">
-            <h2>PhotoStream</h2>
-            <div className="img-container">
-                {Object.values(allPhotos).map(photo => {
-                    return (
-                        <Link key={photo.id} to={`/photos/${photo.id}`}>
-                            <img className="photostream-img" src={photo.picSrc}></img>
-                            {/* {photo.userId === userId && <button>Delete</button>} */}
-                        </Link>
-                    )
-                })}
+        <BlackBg>
+            <div className="photostream-container">
+                <h2>PhotoStream</h2>
+                <div className="img-container">
+                    {Object.values(allPhotos).map(photo => {
+                        return (
+                            <Link key={photo.id} to={`/photos/${photo.id}`}>
+                                <img className="photostream-img" src={photo.picSrc}></img>
+                            </Link>
+                        )
+                    })}
+                </div>
             </div>
-        </div>
+        </BlackBg>
     )
 };

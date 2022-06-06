@@ -46,10 +46,10 @@ export const loadPhotos = () => async dispatch => {
     }
 };
 
-export const editPhoto = ({id, ...rest}) => async dispatch => {
+export const editPhoto = ({id, description}) => async dispatch => {
     const response = await csrfFetch(`/api/photos/edit/${id}`, {
         method: "PUT",
-        body: JSON.stringify(rest)
+        body: JSON.stringify({description})
     })
     const photo = await response.json();
     dispatch(edit(photo));

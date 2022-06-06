@@ -36,8 +36,10 @@ router.put(
     '/edit/:id',
     asyncHandler(async (req, res) => {
         const { id } = req.params;
+        const {description} = req.body;
         const photo = await Photo.findByPk(id);
-        await photo.update({...req.body})
+        photo.description = description;
+        await photo.save()
         return res.json(photo)
     })
 )
@@ -47,7 +49,7 @@ router.delete(
     requireAuth,
     asyncHandler(async (req, res) => {
         const { id } = req.params;
-        const { user } = req
+        // const { user } = req
         const photo = await Photo.findByPk(id);
         // if (user.id === photo.userId){
         await photo.destroy()

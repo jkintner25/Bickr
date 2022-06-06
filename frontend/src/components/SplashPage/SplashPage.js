@@ -119,5 +119,3 @@ export default function SplashPage() {
         </BlackBG>
     )
 }
-
-// https://assets.considerable.com/wp-content/uploads/2019/08/09140218/stones-3.jpg

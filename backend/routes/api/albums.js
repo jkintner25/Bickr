@@ -27,4 +27,12 @@ router.get(
     })
 )
 
+router.post(
+    `/`,
+    asyncHandler(async (req, res) => {
+        const album = await Album.create(req.body);
+        res.json(album)
+    })
+)
+
 module.exports = router
